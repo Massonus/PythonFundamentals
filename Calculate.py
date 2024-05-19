@@ -1,0 +1,12 @@
+print("Enter value a")
+a = int(input())
+print("Enter value b")
+b = int(input())
+
+print("a + b = ", a + b)
+print("a - b = ", a - b)
+print("a * b = ", a * b)
+print("a / b = ", a / b)
+print("a**b = ", a ** b)
+print("a//b = ", a // b)
+print("a%b = ", a % b)
