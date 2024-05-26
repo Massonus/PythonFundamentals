@@ -47,7 +47,7 @@
 # d = {1:'one',2:'two',3:'three',4:'four'}
 # for key in d:
 #     d[key] = d[key] + '#'
-
+#
 # print(d)
 
 ##############
@@ -57,7 +57,7 @@
 # spisok = [10, 40, 20, 30]
 # i = 0
 # while i < len(spisok):
-#     spisok[i] = spisok[i] + 2  
+#     spisok[i] = spisok[i] + 2
 #     i = i + 1
 # print(spisok)
 
@@ -85,7 +85,7 @@
     # після else буде виконаний лише у випадку 
     # якщо не спрацював break
     ############################### 
-# for i in 'hello world':
+# for i in 'hella world':
 #     if i == 'a':
 #         break
 # else:
