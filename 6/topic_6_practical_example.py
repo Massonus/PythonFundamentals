@@ -119,121 +119,127 @@
 # thislist = ["apple", "banana", "cherry"]
 # print(id(thislist))
 # del thislist
-# print(id(thislist))                #this will cause an error
-#                                #because "thislist" no longer exists.
+# #this will cause an error
+# #because "thislist" no longer exists.
+# print(id(thislist))
+
 # #########################
 # # clear() is the method empties the list
 # #############################
 # this_list = ["apple", "banana", "cherry"]
-# print(this_list,id(this_list))
+# print(this_list, id(this_list))
 # this_list.clear()
-# print(this_list,id(this_list))
-#
-#
+# print(this_list, id(this_list))
+
 # #######################
-#
+
 # value.sort()
 # print(value)
 # #########################
 # #copy
 # ###
-# a = [1, 7, 9,[8,9]]
+# a = [1, 7, 9, [8, 9]]
 # b = a.copy()
-# print(a,id(a))
-# print(b,id(b))
+# print(a, id(a))
+# print(b, id(b))
 # # # #####################
-# print(a,id(a[3]))
-# print(b,id(b[3]))
-#
+# b[3][0] = 228
+# print(a, id(a[3]))
+# print(b, id(b[3]))
+
 # ############################
 # #the list() constructor
 # ###########################
-#
+
 # this_list = list(("apple", "banana", "cherry"))       # note the double round-brackets
 # print(this_list)
-#
+
 # ##################
 # ### Tuple
 # ##################
-#
-# value=(7,9,3,6)
+
+# value = (7, 9, 3, 6)
 # print(value)
-#
+
 # ################
-#
+
 # value[2]
-#
+
 # ###################
-#
-# value=(7,8,3,5)
-# ("bat","led")+value
-#
+
+# value = (7, 8, 3, 5)
+# ("bat", "led") + value
+# print(value)
+
 # ###################
-# value=(7,8,3,5)
-# # value[1]=7   # Exception
+# value = (7, 8, 3, 5)
+# # value[1] = 7  # Exception
 # print(value[0:2])
-#
+
 # ##################
 # #Tuple не підтримує
 # #транзитивність стосовно
 # #immutable
-# t=(2,8,[6,7])
-#
+# t = (2, 8, [6, 7])
+
 # ##############################
 # ### Dictionary
 # ###########################3
-#
-# dict_number={"key1":1,"key2":2}
+
+# dict_number = {"key1": 1, "key2": 2}
 # print(dict_number)
-#
+
 # #########################
 # dict_number["key1"]
-#
+
 # #####################
-#
-# dict_number={"key1":1,"key2":2}
-# # # dict_number["ball"]  # KeyError
-#
-# # #print(dict_number.get("ball"))  # None
-# # # #
-# # # ###############
-#
-# dict_number["key3"]=3
-#
+
+# dict_number = {"key1": 1, "key2": 2}
+# dict_number["ball"]  # KeyError
+
+# print(dict_number.get("ball"))  # None
+
+# #####################
 # print(dict_number)
 #
+# dict_number["key3"] = 3
+#
+# print(dict_number)
+
 # # ########################3
-#
-# dict_number.update({"key3":333})
+
+# dict_number.update({"key3": 333})
 # print(dict_number)
-#
+
 # # #######################
-#
-# # dict_number.keys()
-#
+
+# print(dict_number.keys())
+
 # ######################
-#
-# dict_number.values()
-#
+
+# print(dict_number.values())
+
 # ###############
-#
-# dict_number.items()
-#
+
+# print(dict_number.items())
+
 # #########################
-#
+
+# print(dict_number)
 # dict_number.pop("key1")
+# print(dict_number)
+
 # # витирає запис з даним
 # # ключем і повертає значення,
 # # яке відповідає даному ключу
-#
+
 # #####################
 # #Set
 # #####################
-#
-#
-# set_number={1,5,8,8,8}
+
+# set_number = {1, 5, 8, 8, 8}
 # print(set_number)
-#
+
 # ####
 #
 # {1,1.2,2,2,2,2,7,9,4}
