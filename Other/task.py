@@ -230,3 +230,27 @@
 #
 #
 # print(filter_list([1, 2, "a", "b"]))
+
+# def average(*args):
+#     return int(sum(args) / len(args))
+#
+#
+# print(average(1, 5, 2, 3, 67, 12))
+
+total = 1
+
+
+# def add(a, b):
+#     return a + b + total
+#
+#
+# print(add(1, 2), total)
+
+
+# def factorial(in_data):
+#     if in_data == 1:
+#         return 1
+#     return factorial(in_data-1)*in_data
+#
+#
+# print(factorial(9))
