@@ -1,7 +1,7 @@
 import pygame
 
-WIDTH_DISPLAY=500
-HEIGHT_DISPLAY=500
+WIDTH_DISPLAY = 500
+HEIGHT_DISPLAY = 500
 
 WHITE_COLOR = (255, 255, 255)
 BLACK_COLOR = (0, 0, 0)
@@ -14,7 +14,7 @@ PI = 3.14
 
 pygame.init()
 
-screen = pygame.display.set_mode((WIDTH_DISPLAY,HEIGHT_DISPLAY))
+screen = pygame.display.set_mode((WIDTH_DISPLAY, HEIGHT_DISPLAY))
 
 pygame.display.set_caption("Draw primitives")
 
@@ -23,23 +23,20 @@ clock = pygame.time.Clock()
 done = False
 
 while not done:
-    for event in pygame.event.get(): 
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done=True
-    
-     
-    
+            done = True
+
     pygame.draw.rect(screen, PINK_COLOR, (20, 20, 100, 75))
     pygame.draw.rect(screen, (64, 128, 255), (150, 20, 100, 75), 8)
 
-#################################
+    #################################
 
- 
     # pygame.draw.rect(screen, WHITE_COLOR, (20, 20, 100, 75))
 
-################################################################
+    ################################################################
 
     # r1 = pygame.Rect((150, 20, 100, 75))
     # pygame.draw.rect(screen, YELLOW_COLOR, r1, 8)
-    
+
     pygame.display.update()

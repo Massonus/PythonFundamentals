@@ -237,7 +237,7 @@
 #
 # print(average(1, 5, 2, 3, 67, 12))
 
-total = 1
+# total = 1
 
 
 # def add(a, b):

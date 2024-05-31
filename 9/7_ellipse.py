@@ -1,7 +1,7 @@
 import pygame
 
-WIDTH_DISPLAY=500
-HEIGHT_DISPLAY=500
+WIDTH_DISPLAY = 500
+HEIGHT_DISPLAY = 500
 
 WHITE_COLOR = (255, 255, 255)
 BLACK_COLOR = (0, 0, 0)
@@ -14,7 +14,7 @@ PI = 3.14
 
 pygame.init()
 
-screen = pygame.display.set_mode((WIDTH_DISPLAY,HEIGHT_DISPLAY))
+screen = pygame.display.set_mode((WIDTH_DISPLAY, HEIGHT_DISPLAY))
 
 pygame.display.set_caption("Draw primitives")
 
@@ -23,14 +23,12 @@ clock = pygame.time.Clock()
 done = False
 
 while not done:
-    for event in pygame.event.get(): 
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    
-      
+
     # передається прямокутна область, в якій промальовується еліпс
 
     pygame.draw.ellipse(screen, GREEN_COLOR, (10, 50, 280, 100))
 
     pygame.display.update()
-    

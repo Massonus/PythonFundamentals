@@ -13,7 +13,6 @@ import re
 # print(result_2)
 
 
-
 # print(result_3)
 
 
@@ -106,7 +105,6 @@ import re
 # print(result_2)
 
 
-
 # #########################################
 # import re
 
@@ -122,25 +120,20 @@ import re
 # print(result_3)
 
 
-
 ##########################################
 import re
 
 pattern = "Hello SoftServe IT Academy IT SoftServe every day helli ely"
 
-#Check if the string contains "er" followed by 0 or more "x" characters:
+# Check if the string contains "er" followed by 0 or more "x" characters:
 result_1 = re.findall("erx*", pattern)
 
-
-#Check if the string contains "e" followed by exactly two "l" characters:
+# Check if the string contains "e" followed by exactly two "l" characters:
 result_2 = re.findall("el{2}", pattern)
 
-#Check if the string contains either "IT" or "day":
+# Check if the string contains either "IT" or "day":
 result_3 = re.findall("IT|day", pattern)
 
 print(result_1)
 print(result_2)
 print(result_3)
-
-
-

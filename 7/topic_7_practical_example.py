@@ -1,83 +1,77 @@
+# total = 0
+#
+# def my_sum(arg1, arg2):
+#
+#     global total
+#     total = arg1 + arg2
+#     print("Inside the function total : ", total)
+#     return total
+#
+# print("before", total)
+# my_sum(56, 30)
+# print("Outside the function total : ", total)
 
 
-total = 0
-
-def my_sum(arg1, arg2):
-    
-    global total 
-    total = arg1 + arg2
-    print("Inside the function total : ", total)
-    return total
-    
-print("before", total)
-my_sum(56, 30)
-print("Outside the function total : ", total)
-
-
-# def print_info(name, age = 18):
+# def print_info(name, age=18):
 #     print("Name: ", name)
 #     print("Age: ", age)
-
-
-# print_info(age = 345, name = "Liubov")
-
-
-
-
-
+#
+#
+# print_info(age=345, name="Liubov")
 
 # def sayHello(user_name: str, user_age: int = 0) -> str:
 #     """
 #     input parameters: None
-#     output: str 
+#     output: str
 #     """
 #     return f"Hello, {user_name}, age {user_age}"
-       
-
-
-
-# # # print(dir())
-# # # print(sayHello.__doc__)
+#
+#
+# print(dir())
+# print(sayHello.__doc__)
 # print(sayHello("Liubov", 89))
 # print(sayHello(34, 78))
 
-# def print_info(name, age = 80):
+# def print_info(name, age=80):
 #     print("Name: ", name)
 #     print("Age: ", age)
-
-# # print_info("Alex")
-# # print("-" * 10)
-# # print_info(age = 90, name = "Sam")
+#
+#
+# print_info("Alex")
+# print("-" * 10)
+# print_info(age=90, name="Sam")
 
 # a = input("Enter your name:")
 # b = input("Enter your age:")
 # print_info(age = b, name = a)
 
 
-
-
-# def sayHello():                
-#    print('Hello world!')                                
+# def sayHello():
+#     print('Hello world!')
+#
+#
 # # # ####################################3
-  
-# sayHello() 
-# sayHello() 
+#
+# sayHello()
+# sayHello()
 #                          # викликаємо функцію
 
 #########################################
-#t=sayHello 
-#print(t)                         # викликаємо функцію знову
+# t = sayHello
+# print(t)  # викликаємо функцію знову
 #######################
 
 # # ##
 # def add(x, y):
 #     return x + y
+#
+#
 # # # # ##
 # # print(add.__doc__)
-
+#
 # print(add(1, 10))
-
-# # # ##
+#
+# # # # ##
 # print(add('abc', 'def'))
 # #
 
@@ -94,7 +88,7 @@ print("Outside the function total : ", total)
 #########################################
 # def func():
 #     pass
-    
+
 # ########################################## # # # #
 # print(func())
 #################################
@@ -129,11 +123,10 @@ print("Outside the function total : ", total)
 # #         print(a, 'is equal to', b)
 # #     else:
 # #         print(b, 'is maximum')
- 
+
 # # #Коректне використання функції
 
 # # print_max(3, 4)      #аргументи — літеральні константи
- 
 
 
 # # #Некоректне використання функції
@@ -226,7 +219,7 @@ print("Outside the function total : ", total)
 #     print(type(args),args)
 #     for argument in args:
 #         print(argument)
- 
+
 # # # # # # # # # #  ################
 # unknown("hello","world")
 # unknown(1, 2, 3, 4, 5) 
@@ -265,7 +258,6 @@ print("Outside the function total : ", total)
 # w=func(a='python')
 # print(w)
 # # # ###
-
 
 
 #######################################
@@ -321,7 +313,7 @@ print("Outside the function total : ", total)
 
 # # # глобальна змінна age
 # # age = 44
- 
+
 # # def info():
 # #     print(age) # Друкуєм глобальну змінну age
 # #  # створюєм локальну змінну age 
@@ -347,12 +339,12 @@ print("Outside the function total : ", total)
 # # оператор global
 # # глобальна змінна age
 # age = 13
- 
+
 # # функція яка змінює глобальну змінну
 # def get_older():
 #     global age
 #     age += 1
- 
+
 # # print(age) # надрукує 13
 # # get_older() # збільшуєм age на 1
 # # print(age) # надрукує 14
@@ -397,8 +389,8 @@ print("Outside the function total : ", total)
 #     output:                None
 #     """
 #     print(f"Hello, {name_user}")
-    # return f"Hello, {name_user}"
-    # print("after")
+# return f"Hello, {name_user}"
+# print("after")
 
 # my_print()
 # a = my_print("Volodymyr")
@@ -410,7 +402,6 @@ print("Outside the function total : ", total)
 # def my_sum(arg1 = 45, arg2 = 67):
 #     total = arg1 + arg2
 #     return total
-    
 
 
 # print(my_sum())
@@ -421,23 +412,3 @@ print("Outside the function total : ", total)
 
 
 # print_info()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

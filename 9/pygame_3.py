@@ -17,7 +17,7 @@ DISPLAY_HEIGH = 400
 pygame.init()
 # pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGH))
 
-pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGH), pygame.RESIZABLE)
+gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGH), pygame.RESIZABLE)
 
 pygame.display.set_caption("My first game")
 
@@ -38,20 +38,12 @@ while not crashed:
     # цикл обробки подій
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            print("User asked to quit.")
-        elif event.type == pygame.KEYDOWN:
-            print("User pressed a key.")
-        elif event.type == pygame.KEYUP:
-            print("User let go of a key.")
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            print("User pressed a mouse button")
+            exit()
 
+        print(event)
     # ######################
     # зміна об'єктів та інше
     # ######################
-
+    gameDisplay.fill(PURPLE)
     # обновлення екрану
     pygame.display.update()
-
-# вихід
-pygame.quit()
