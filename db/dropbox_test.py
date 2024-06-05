@@ -1,8 +1,4 @@
-import dropbox
 import dropbox.files
-import os
-
-#!/usr/bin/env python3
 from dropbox import DropboxOAuth2FlowNoRedirect
 
 '''
