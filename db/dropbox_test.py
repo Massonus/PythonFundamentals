@@ -1,10 +1,6 @@
 import dropbox.files
 from dropbox import DropboxOAuth2FlowNoRedirect
 
-'''
-This example walks through a basic oauth flow using the existing long-lived token type
-Populate your app key and app secret in order to run this locally
-'''
 APP_KEY = "87b5x0oevsak3x9"
 APP_SECRET = "c0j50xevkstje4f"
 
