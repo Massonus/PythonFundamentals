@@ -254,3 +254,96 @@
 #
 #
 # print(factorial(9))
+
+# try:
+#     input_number = int(input("Enter a number: "))
+#     if input_number % 2 == 0:
+#         print(f"{input_number} is odd number")
+#     else:
+#         print(f"{input_number} is an even number")
+# except (ValueError, ZeroDivisionError) as e:
+#     print(f"Incorrect data: {e}")
+
+
+# def check_age(ages):
+#     if ages <= 0:
+#         raise ValueError("Incorrect age")
+#
+#
+# # You can edit code below
+# def input_age():
+#     age = int(input())
+#     check_age(age)
+#     print(age)
+#
+#
+# try:
+#     input_age()
+# except ValueError:
+#     input_age()
+
+
+# class InputError(Exception):
+#     def __init__(self, data):
+#         self.data = data
+#
+#     def __str__(self):
+#         return repr(self.data)
+#
+#
+# def check(text):
+#     if len(text) < 3 and type(text) is str:
+#         raise InputError('Short text error')
+#     if len(text) > 15 and type(text) is str:
+#         raise InputError('Long text error')
+#     if type(text) is not str:
+#         raise InputError('Type text error')
+#
+#     return True
+
+# def check_odd_even(number):
+#     try:
+#         number = int(number)
+#         if number % 2 == 0:
+#             return 'Entered number is even'
+#         else:
+#             return 'Entered number is odd'
+#     except ValueError:
+#         return "You entered not a number."
+
+
+# def divide(numerator, denominator):
+#     try:
+#         return f"Result is {numerator / denominator}"
+#     except ZeroDivisionError:
+#         return f"Oops, {numerator}/{denominator}, division by zero is error!!!"
+#     except TypeError:
+#         return "Value Error! You did not enter a number!"
+#
+# print(divide("5", 2))
+
+# def check(login):
+#     if "employee" in login.lower() or "admin" in login.lower():
+#         return True
+#     else:
+#         raise ValueError(f"incorrect login '{login}'")
+
+class MyError(Exception):
+    def __init__(self, data):
+        self.data = data
+
+
+def check_positive(number):
+    try:
+        number = float(number)
+
+        if number > 0:
+            return f"You input positive number: {number}"
+        elif number < 0:
+            return MyError(f"You input negative number: {float(number)}. Try again.")
+
+    except (TypeError, ValueError):
+        return "Error type: ValueError!"
+
+
+print(check_positive(-19))
