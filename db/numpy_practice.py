@@ -7,3 +7,7 @@ print(np.mean(numbers))  # average
 print(np.median(numbers))
 
 print(np.std(numbers))
+
+print(np.random.rand(2, 3))
+
+print(np.arange(10, 20, 2))

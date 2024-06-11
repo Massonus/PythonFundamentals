@@ -328,22 +328,110 @@
 #     else:
 #         raise ValueError(f"incorrect login '{login}'")
 
-class MyError(Exception):
-    def __init__(self, data):
-        self.data = data
+# class MyError(Exception):
+#     def __init__(self, data):
+#         self.data = data
+#
+#
+# def check_positive(number):
+#     try:
+#         number = float(number)
+#
+#         if number > 0:
+#             return f"You input positive number: {number}"
+#         elif number < 0:
+#             return MyError(f"You input negative number: {float(number)}. Try again.")
+#
+#     except (TypeError, ValueError):
+#         return "Error type: ValueError!"
+#
+#
+# print(check_positive(-19))
+
+# def celsius_to_fahrenheit(temps):
+#     return [(temp * 9 / 5) + 32 for temp in temps]
+#
+#
+# celsius_temperatures = [0, 10, 20, 30, 40]
+# print(celsius_to_fahrenheit(celsius_temperatures))
 
 
-def check_positive(number):
-    try:
-        number = float(number)
-
-        if number > 0:
-            return f"You input positive number: {number}"
-        elif number < 0:
-            return MyError(f"You input negative number: {float(number)}. Try again.")
-
-    except (TypeError, ValueError):
-        return "Error type: ValueError!"
+from itertools import permutations
 
 
-print(check_positive(-19))
+# def combinations(list1, list2):
+#     unique_combinations = []
+#
+#     for i in range(len(list1)):
+#         for j in range(len(list2)):
+#             yield list1[i], list2[j]
+#
+#
+# list1 = [1, 2, 3]
+# list2 = ['a', 'b', 'c']
+# for combination in combinations(list1, list2):
+#     print(combination)
+
+
+# def add_tag(tag):
+#     def decorator(func):
+#
+#         return tag
+#     return decorator
+#
+#
+# @add_tag("<strong>")
+# def get_message():
+#     return "Hello, World!"
+#
+#
+# print(get_message())
+
+
+# def add_tag(tag):
+#     def decorator(func):
+#         def wrapper():
+#             return f"{tag}{func()}{tag}"
+#
+#         return wrapper
+#
+#     return decorator
+#
+#
+# @add_tag("<strong>")
+# def get_message():
+#     return "Hello, World!"
+#
+#
+# print(get_message())
+# input_number = int(input("Enter numbers: "))
+#
+# fibonacci_numbers = [0, 1]
+#
+# for i in range(2, input_number):
+#     fibonacci_numbers.append(fibonacci_numbers[i - 1] + fibonacci_numbers[i - 2])
+#
+# print(f"There are some Fibonacci numbers till the number you entered ({input_number}):\n{fibonacci_numbers}")
+
+
+# def fibonacci_numbers():
+#     a, b = 0, 1
+#     while True:
+#         yield a
+#         b = a + b
+#         yield b
+#         a = a + b
+#
+#
+# fib = fibonacci_numbers()
+# for i in range(10):
+#     print(next(fib))
+
+
+# def celsius_to_fahrenheit(temps):
+#     return list(map(lambda x: (x * 9 / 5) + 32, temps))
+#
+#
+# celsius_temperatures = [0, 10, 20, 30, 40]
+# print(celsius_to_fahrenheit(celsius_temperatures))
+
