@@ -466,3 +466,4 @@ with open("result.json", "w") as write_file:
 file_cars.close()
 file_cars2.close()
 result_file.close()
+
