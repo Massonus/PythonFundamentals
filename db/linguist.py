@@ -14,8 +14,7 @@ class User(Base):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-    deck = relationship("Deck", back_populates="user")
-    card = relationship("Card", back_populates="user")
+
 
     @staticmethod
     def user_create(name, email, password):
@@ -56,7 +55,6 @@ class Deck(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship("User", back_populates="deck")
 
     @staticmethod
     def deck_create(name, user_id):
@@ -91,7 +89,6 @@ class Card(Base):
     word = Column(String)
     translation = Column(String)
     tip = Column(String)
-    user = relationship("User", back_populates="card")
 
     @staticmethod
     def card_create(user_id, word, translation, tip):
@@ -126,9 +123,9 @@ class Card(Base):
         return is_card_exist
 
 
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
-User.user_create('test', 'email', 'pass')
+# User.user_create('test', 'email', 'pass')
 
 # User.user_get_by_id(1)
 # print(User.user_update_name(1, "main").name)
@@ -139,5 +136,5 @@ User.user_create('test', 'email', 'pass')
 # result = Card.card_filter('tip')
 # print(result)
 # Card.card_update(1, 'word', 'test', 'test')
-Card.card_delete_by_id(1)
-session.commit()
+# Card.card_delete_by_id(1)
+# session.commit()

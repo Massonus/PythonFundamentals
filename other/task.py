@@ -358,7 +358,6 @@
 
 from itertools import permutations
 
-
 # def combinations(list1, list2):
 #     unique_combinations = []
 #
@@ -435,3 +434,35 @@ from itertools import permutations
 # celsius_temperatures = [0, 10, 20, 30, 40]
 # print(celsius_to_fahrenheit(celsius_temperatures))
 
+
+# def my_gen():
+#     for i in range(1, 100, 1):
+#         yield i
+#
+#
+# for i in my_gen():
+#     print(i)
+# strings = []
+# for i in range(3):
+#     strings.append(input("Input a string: "))
+#
+# with open("test.txt", "w") as file:
+#     for item in strings:
+#         file.write(item + "\n")
+
+import json
+
+file_cars = open("cars.json", "r")
+file_cars2 = open("cars2.json", "r")
+result_file = open("result.json", "w")
+
+cars1 = json.load(file_cars)
+cars1.append(json.load(file_cars2))
+
+result = sorted(cars1, key=lambda x: x['max_speed'])
+with open("result.json", "w") as write_file:
+    json.dump(result, write_file)
+
+file_cars.close()
+file_cars2.close()
+result_file.close()
