@@ -211,15 +211,15 @@
 #
 #     return round(100 * favourable_outcomes / len(lst), 1)
 
-# def add_indexes(lst):
-#     new_list = []
-#     for i in enumerate(lst):
-#         new_list.append(i[0] + i[1])
-#
-#     return new_list
-#
-#
-# print(add_indexes([0, -1, -2, -3, -4]))
+def add_indexes(lst):
+    new_list = []
+    for i in enumerate(lst):
+        new_list.append(i[0] + i[1])
+
+    return new_list
+
+
+print(add_indexes([0, -1, -2, -3, -4]))
 
 # def filter_list(lst):
 #     result = lst[:]
@@ -450,20 +450,20 @@ from itertools import permutations
 #     for item in strings:
 #         file.write(item + "\n")
 
-import json
-
-file_cars = open("cars.json", "r")
-file_cars2 = open("cars2.json", "r")
-result_file = open("result.json", "w")
-
-cars1 = json.load(file_cars)
-cars1.append(json.load(file_cars2))
-
-result = sorted(cars1, key=lambda x: x['max_speed'])
-with open("result.json", "w") as write_file:
-    json.dump(result, write_file)
-
-file_cars.close()
-file_cars2.close()
-result_file.close()
+# import json
+#
+# file_cars = open("cars.json", "r")
+# file_cars2 = open("cars2.json", "r")
+# result_file = open("result.json", "w")
+#
+# cars1 = json.load(file_cars)
+# cars1.append(json.load(file_cars2))
+#
+# result = sorted(cars1, key=lambda x: x['max_speed'])
+# with open("result.json", "w") as write_file:
+#     json.dump(result, write_file)
+#
+# file_cars.close()
+# file_cars2.close()
+# result_file.close()
 
