@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File to Cloudinary</title>
+    <script src="{{ url_for('static', filename='upload.js') }}" defer></script>
+</head>
+<body>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" name="file">
+        <button type="submit">Upload</button>
+    </form>
+    <div id="result"></div>
+    <button id="deleteButton" style="display:none;">Delete</button>
+</body>
+</html>
