@@ -38,7 +38,7 @@ def authorize():
         'redirect_uri': REDIRECT_URI,
         'token_access_type': 'offline'
     })
-    return render_template('auth.html', auth_url=auth_url)
+    return redirect(auth_url)
 
 
 @app.route('/oauth2/callback')
