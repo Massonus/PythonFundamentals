@@ -124,11 +124,23 @@ def upload():
     upload_token = upload_file(credentials, file_path)
 
     if upload_token:
-        image_url = create_media_item(credentials, upload_token)
-        os.remove(file_path)  # Удаляем файл из папки uploads
-        return jsonify({'message': 'Файл успешно загружен', 'url': image_url})
+        media_item_info = create_media_item(credentials, upload_token)
+        if media_item_info:
+            # Create and share album
+            album_id = create_album(credentials, 'Uploaded Album')
+            if album_id:
+                add_media_to_album(credentials, album_id, media_item_info['id'])
+                publish_album(credentials, album_id)
+                image_url = media_item_info['productUrl']
+                print(f"Public URL: {image_url}")
+                os.remove(file_path)  # Удаляем файл из папки uploads
+                return jsonify({'message': 'File uploaded successfully', 'url': image_url})
+            else:
+                return jsonify({'message': 'Failed to create or share album'})
+        else:
+            return jsonify({'message': 'Failed to retrieve media item info'})
     else:
-        return jsonify({'message': 'Ошибка загрузки файла'})
+        return jsonify({'message': 'File upload failed'})
 
 
 def upload_file(credentials, file_path):
@@ -169,9 +181,64 @@ def create_media_item(credentials, upload_token):
     )
     if response.status_code == 200:
         media_item = response.json().get('newMediaItemResults')[0].get('mediaItem')
-        base_url = media_item.get('baseUrl')
-        return f"{base_url}=w2048-h1024"  # Возвращаем публичную ссылку на изображение
+        return media_item
     return None
+
+
+def create_album(credentials, album_title):
+    headers = {
+        'Authorization': 'Bearer {}'.format(credentials.token),
+        'Content-Type': 'application/json'
+    }
+    album_body = {
+        'album': {'title': album_title}
+    }
+    response = requests.post(
+        'https://photoslibrary.googleapis.com/v1/albums',
+        headers=headers,
+        json=album_body
+    )
+    if response.status_code == 200:
+        album_id = response.json().get('id')
+        return album_id
+    return None
+
+
+def add_media_to_album(credentials, album_id, media_id):
+    headers = {
+        'Authorization': 'Bearer {}'.format(credentials.token),
+        'Content-Type': 'application/json'
+    }
+    add_media_body = {
+        'mediaItemIds': [media_id]
+    }
+    response = requests.post(
+        f'https://photoslibrary.googleapis.com/v1/albums/{album_id}:batchAddMediaItems',
+        headers=headers,
+        json=add_media_body
+    )
+    return response.status_code == 200
+
+
+def publish_album(credentials, album_id):
+    headers = {
+        'Authorization': 'Bearer {}'.format(credentials.token),
+        'Content-Type': 'application/json'
+    }
+    share_body = {
+        'mediaItems': [{
+            'id': album_id
+        }],
+        'shareInfo': {
+            'shareable': True
+        }
+    }
+    response = requests.post(
+        f'https://photoslibrary.googleapis.com/v1/albums/{album_id}:share',
+        headers=headers,
+        json=share_body
+    )
+    return response.status_code == 200
 
 
 def credentials_to_dict(credentials):
