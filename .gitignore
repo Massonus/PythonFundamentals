@@ -25,6 +25,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+download_photo_api/google_photo/server.crt
+download_photo_api/google_photo/server.key
+download_photo_api/google_photo/client_secret.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -121,7 +124,7 @@ celerybeat.pid
 
 # Environments
 .env
-dev.env
+download_photo_api/dev.env
 .venv
 env/
 venv/
