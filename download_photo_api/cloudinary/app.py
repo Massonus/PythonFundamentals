@@ -1,15 +1,25 @@
-from flask import Flask, request, jsonify, render_template
+import os
+
 import cloudinary
 import cloudinary.uploader
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify, render_template
+
+# download secrets from .env file that should be in the main directory
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'dev.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 app = Flask(__name__)
 
 # Настройка Cloudinary
 cloudinary.config(
-    cloud_name='dirk598i2',
-    api_key='967978327629942',
-    api_secret='XdO2dvFYc8cewAt3R_rIR5q50rg'
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("API_KEY"),
+    api_secret=os.getenv("API_SECRET")
 )
+
+# Папка для загрузки изображений
+UPLOAD_FOLDER = 'my_images'
 
 
 @app.route('/')
@@ -23,7 +33,9 @@ def upload_file():
         return jsonify({'error': 'No file part'}), 400
 
     file = request.files['file']
-    upload_result = cloudinary.uploader.upload(file)
+
+    # Загрузка изображения в указанную папку
+    upload_result = cloudinary.uploader.upload(file, folder=UPLOAD_FOLDER)
 
     if not upload_result:
         return jsonify({'error': 'Failed to upload to Cloudinary'}), 500

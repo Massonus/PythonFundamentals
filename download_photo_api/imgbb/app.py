@@ -1,10 +1,17 @@
-from flask import Flask, request, jsonify, render_template
+import os
+
 import requests
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify, render_template
+
+# download secrets from .env file that should be in the main directory
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'dev.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 app = Flask(__name__)
 
 # Замените на ваш API ключ Imgbb
-IMGBB_API_KEY = '791b9b9141f84a37a8427f94c581d67e'
+IMGBB_API_KEY = os.getenv("IMGBB_API_KEY")
 
 
 @app.route('/')
