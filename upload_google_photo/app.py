@@ -1,20 +1,60 @@
 from flask import Flask, redirect, url_for, session, request, render_template, jsonify
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from flask_sqlalchemy import SQLAlchemy
 import requests
 import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tokens.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 CLIENT_SECRETS_FILE = "client_secret.json"
-SCOPES = ['https://www.googleapis.com/auth/photoslibrary']
+SCOPES = ['https://www.googleapis.com/auth/photoslibrary', 'https://www.googleapis.com/auth/photoslibrary.sharing']
+
+
+class Token(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(500), nullable=False)
+    refresh_token = db.Column(db.String(500), nullable=False)
+    token_uri = db.Column(db.String(500), nullable=False)
+    client_id = db.Column(db.String(500), nullable=False)
+    client_secret = db.Column(db.String(500), nullable=False)
+    scopes = db.Column(db.String(500), nullable=False)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('upload_page'))
+
+
+@app.route('/upload')
+def upload_page():
+    if 'credentials' not in session:
+        token = Token.query.first()
+        if token:
+            credentials = Credentials(
+                token=token.token,
+                refresh_token=token.refresh_token,
+                token_uri=token.token_uri,
+                client_id=token.client_id,
+                client_secret=token.client_secret,
+                scopes=token.scopes.split(',')
+            )
+            if credentials.expired and credentials.refresh_token:
+                credentials.refresh(Request())
+                token.token = credentials.token
+                db.session.commit()
+                session['credentials'] = credentials_to_dict(credentials)
+        else:
+            return redirect(url_for('authorize'))
+
+    return render_template('upload.html')
 
 
 @app.route('/authorize')
@@ -44,8 +84,23 @@ def oauth2callback():
     )
     flow.fetch_token(authorization_response=request.url)
     credentials = flow.credentials
+
+    token = Token.query.first()
+    if token:
+        db.session.delete(token)
+    new_token = Token(
+        token=credentials.token,
+        refresh_token=credentials.refresh_token,
+        token_uri=credentials.token_uri,
+        client_id=credentials.client_id,
+        client_secret=credentials.client_secret,
+        scopes=','.join(credentials.scopes)
+    )
+    db.session.add(new_token)
+    db.session.commit()
+
     session['credentials'] = credentials_to_dict(credentials)
-    return render_template('upload.html')
+    return redirect(url_for('upload_page'))
 
 
 @app.route('/upload', methods=['POST'])
@@ -69,10 +124,11 @@ def upload():
     upload_token = upload_file(credentials, file_path)
 
     if upload_token:
-        create_album(credentials, file.filename, upload_token)
-        return jsonify({'message': 'File uploaded successfully'})
+        image_url = create_media_item(credentials, upload_token)
+        os.remove(file_path)  # Удаляем файл из папки uploads
+        return jsonify({'message': 'Файл успешно загружен', 'url': image_url})
     else:
-        return jsonify({'message': 'File upload failed'})
+        return jsonify({'message': 'Ошибка загрузки файла'})
 
 
 def upload_file(credentials, file_path):
@@ -93,12 +149,12 @@ def upload_file(credentials, file_path):
     return None
 
 
-def create_album(credentials, album_title, upload_token):
+def create_media_item(credentials, upload_token):
     headers = {
         'Authorization': 'Bearer {}'.format(credentials.token),
         'Content-Type': 'application/json'
     }
-    album_body = {
+    media_item_body = {
         'newMediaItems': [
             {
                 'description': 'Uploaded by Flask app',
@@ -109,9 +165,13 @@ def create_album(credentials, album_title, upload_token):
     response = requests.post(
         'https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate',
         headers=headers,
-        json=album_body
+        json=media_item_body
     )
-    return response.status_code == 200
+    if response.status_code == 200:
+        media_item = response.json().get('newMediaItemResults')[0].get('mediaItem')
+        base_url = media_item.get('baseUrl')
+        return f"{base_url}=w2048-h1024"  # Возвращаем публичную ссылку на изображение
+    return None
 
 
 def credentials_to_dict(credentials):
@@ -127,4 +187,6 @@ def credentials_to_dict(credentials):
 
 if __name__ == '__main__':
     context = ('server.crt', 'server.key')  # Путь к сертификату и ключу
+    with app.app_context():
+        db.create_all()
     app.run(host='localhost', port=5000, ssl_context=context, debug=True)
