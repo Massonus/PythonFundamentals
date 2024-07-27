@@ -52,4 +52,4 @@ def authorized():
 
 
 if __name__ == '__main__':
-    app.run(ssl_context=('../server.crt', '../server.key'), debug=True)
+    app.run(ssl_context=('../nginx-selfsigned.crt', '../nginx-selfsigned.key'), debug=True)

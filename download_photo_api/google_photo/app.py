@@ -258,7 +258,7 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-    context = ('../../server.crt', '../../server.key')  # Путь к сертификату и ключу
+    context = ('../../nginx-selfsigned.crt', '../../nginx-selfsigned.key')  # Путь к сертификату и ключу
     with app.app_context():
         db.create_all()
     app.run(host='localhost', port=5000, ssl_context=context, debug=True)
