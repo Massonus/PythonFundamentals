@@ -1,6 +1,12 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, render_template
-from authlib.integrations.flask_client import OAuth
 import os
+
+from authlib.integrations.flask_client import OAuth
+from dotenv import load_dotenv
+from flask import Flask, jsonify, render_template, redirect, url_for, session
+
+# download secrets from .env file that should be in the main directory
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'dev.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -8,8 +14,8 @@ app.secret_key = os.urandom(24)
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    client_id='66208709014-l7tr5ttaalp10mkookpfae1rhihhd1f6.apps.googleusercontent.com',
-    client_secret='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',
+    client_id=os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
     access_token_url='https://oauth2.googleapis.com/token',
     access_token_params=None,
     authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -46,4 +52,4 @@ def authorized():
 
 
 if __name__ == '__main__':
-    app.run(ssl_context=('server.crt', 'server.key'), debug=True)
+    app.run(ssl_context=('../server.crt', '../server.key'), debug=True)

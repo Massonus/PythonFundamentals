@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 
 # download secrets from .env file that should be in the main directory
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'dev.env')
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', 'dev.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 app = Flask(__name__)

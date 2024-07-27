@@ -25,8 +25,8 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-download_photo_api/google_photo/server.crt
-download_photo_api/google_photo/server.key
+server.crt
+server.key
 download_photo_api/google_photo/client_secret.json
 
 # PyInstaller
@@ -124,7 +124,7 @@ celerybeat.pid
 
 # Environments
 .env
-download_photo_api/dev.env
+dev.env
 .venv
 env/
 venv/

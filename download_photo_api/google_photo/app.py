@@ -15,8 +15,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 CLIENT_SECRETS_FILE = "client_secret.json"
-SCOPES = ['https://www.googleapis.com/auth/photoslibrary', 'https://www.googleapis.com/auth/photoslibrary.sharing']
-
+SCOPES = sorted([
+    'https://www.googleapis.com/auth/photoslibrary.sharing',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/photoslibrary'
+])
 
 class Token(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -253,7 +258,7 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-    context = ('server.crt', 'server.key')  # Путь к сертификату и ключу
+    context = ('../../server.crt', '../../server.key')  # Путь к сертификату и ключу
     with app.app_context():
         db.create_all()
     app.run(host='localhost', port=5000, ssl_context=context, debug=True)
