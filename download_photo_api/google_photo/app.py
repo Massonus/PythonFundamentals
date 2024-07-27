@@ -7,14 +7,14 @@ import requests
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tokens.db'
+app.secret_key = 'your_secret_key'  # Устанавливаем секретный ключ для сессий
+app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Папка для загрузки файлов
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tokens.db'  # Настройка базы данных
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app)  # Инициализация SQLAlchemy для работы с базой данных
 
-CLIENT_SECRETS_FILE = "client_secret.json"
+CLIENT_SECRETS_FILE = "client_secret.json"  # Файл с клиентскими секретами
 SCOPES = sorted([
     'https://www.googleapis.com/auth/photoslibrary.sharing',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -23,6 +23,8 @@ SCOPES = sorted([
     'https://www.googleapis.com/auth/photoslibrary'
 ])
 
+
+# Модель для хранения токенов в базе данных
 class Token(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.String(500), nullable=False)
@@ -35,7 +37,7 @@ class Token(db.Model):
 
 @app.route('/')
 def index():
-    return redirect(url_for('upload_page'))
+    return redirect(url_for('upload_page'))  # Перенаправляем на страницу загрузки файлов
 
 
 @app.route('/upload')
@@ -59,7 +61,7 @@ def upload_page():
         else:
             return redirect(url_for('authorize'))
 
-    return render_template('upload.html')
+    return render_template('upload.html')  # Отображаем шаблон upload.html
 
 
 @app.route('/authorize')
@@ -75,7 +77,7 @@ def authorize():
         include_granted_scopes='true'
     )
     session['state'] = state
-    return redirect(authorization_url)
+    return redirect(authorization_url)  # Перенаправляем пользователя на страницу авторизации Google
 
 
 @app.route('/oauth2callback')
@@ -92,7 +94,7 @@ def oauth2callback():
 
     token = Token.query.first()
     if token:
-        db.session.delete(token)
+        db.session.delete(token)  # Удаляем старый токен из базы данных
     new_token = Token(
         token=credentials.token,
         refresh_token=credentials.refresh_token,
@@ -105,7 +107,7 @@ def oauth2callback():
     db.session.commit()
 
     session['credentials'] = credentials_to_dict(credentials)
-    return redirect(url_for('upload_page'))
+    return redirect(url_for('upload_page'))  # Перенаправляем на страницу загрузки файлов
 
 
 @app.route('/upload', methods=['POST'])
@@ -124,14 +126,14 @@ def upload():
 
     file = request.files['file']
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-    file.save(file_path)
+    file.save(file_path)  # Сохраняем файл в указанную папку
 
     upload_token = upload_file(credentials, file_path)
 
     if upload_token:
         media_item_info = create_media_item(credentials, upload_token)
         if media_item_info:
-            # Create and share album
+            # Создание и публикация альбома
             album_id = create_album(credentials, 'Uploaded Album')
             if album_id:
                 add_media_to_album(credentials, album_id, media_item_info['id'])
@@ -260,5 +262,5 @@ def credentials_to_dict(credentials):
 if __name__ == '__main__':
     context = ('../../nginx-selfsigned.crt', '../../nginx-selfsigned.key')  # Путь к сертификату и ключу
     with app.app_context():
-        db.create_all()
-    app.run(host='localhost', port=5000, ssl_context=context, debug=True)
+        db.create_all()  # Создаем все таблицы в базе данных
+    app.run(host='localhost', port=5000, ssl_context=context, debug=True)  # Запуск приложения с SSL и в режиме отладки
