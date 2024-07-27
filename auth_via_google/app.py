@@ -22,7 +22,7 @@ google = oauth.register(
     authorize_url='https://accounts.google.com/o/oauth2/auth',  # URL для авторизации
     authorize_params=None,
     client_kwargs={'scope': 'email profile'},  # Области доступа, запрашиваемые у пользователя
-    redirect_uri='https://127.0.0.1:5000/login/authorized'  # URL для перенаправления после авторизации
+    redirect_uri='https://localhost:5000/login/authorized'  # URL для перенаправления после авторизации
 )
 
 
@@ -60,6 +60,6 @@ def authorized():
 if __name__ == '__main__':
     crt = os.path.join(os.path.dirname(__file__), '..', 'nginx-selfsigned.crt')
     key = os.path.join(os.path.dirname(__file__), '..', 'nginx-selfsigned.key')
-    app.run(ssl_context=(crt, key), debug=True)
+    app.run(host='localhost', port=5000, ssl_context=(crt, key), debug=True)
     # Запускаем приложение с использованием SSL-сертификата и ключа
     # и включённым режимом отладки
