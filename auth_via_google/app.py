@@ -58,6 +58,8 @@ def authorized():
 
 # Запуск приложения
 if __name__ == '__main__':
-    app.run(ssl_context=('../nginx-selfsigned.crt', '../nginx-selfsigned.key'), debug=True)
+    crt = os.path.join(os.path.dirname(__file__), '..', 'nginx-selfsigned.crt')
+    key = os.path.join(os.path.dirname(__file__), '..', 'nginx-selfsigned.key')
+    app.run(ssl_context=(crt, key), debug=True)
     # Запускаем приложение с использованием SSL-сертификата и ключа
     # и включённым режимом отладки

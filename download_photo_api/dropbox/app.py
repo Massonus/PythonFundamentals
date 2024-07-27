@@ -14,7 +14,7 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # Создаём экземпляр Flask приложения
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Устанавливаем секретный ключ для сессий
+app.secret_key = os.urandom(24)  # Устанавливаем секретный ключ для сессий
 
 # Эти переменные должны быть установлены вашим OAuth2 провайдером (например, Dropbox)
 DROPBOX_APP_KEY = os.getenv("DROPBOX_APP_KEY")

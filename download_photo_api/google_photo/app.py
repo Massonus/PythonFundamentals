@@ -7,14 +7,14 @@ import requests
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Устанавливаем секретный ключ для сессий
+app.secret_key = os.urandom(24)  # Устанавливаем секретный ключ для сессий
 app.config['UPLOAD_FOLDER'] = 'static/uploads'  # Папка для загрузки файлов
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tokens.db'  # Настройка базы данных
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)  # Инициализация SQLAlchemy для работы с базой данных
 
-CLIENT_SECRETS_FILE = "client_secret.json"  # Файл с клиентскими секретами
+CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), 'client_secret.json')  # Файл с клиентскими секретами
 SCOPES = sorted([
     'https://www.googleapis.com/auth/photoslibrary.sharing',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -260,7 +260,9 @@ def credentials_to_dict(credentials):
 
 
 if __name__ == '__main__':
-    context = ('../../nginx-selfsigned.crt', '../../nginx-selfsigned.key')  # Путь к сертификату и ключу
+    crt = os.path.join(os.path.dirname(__file__), '..', '..', 'nginx-selfsigned.crt')
+    key = os.path.join(os.path.dirname(__file__), '..', '..', 'nginx-selfsigned.key')
+    context = (crt, key)  # Путь к сертификату и ключу
     with app.app_context():
         db.create_all()  # Создаем все таблицы в базе данных
     app.run(host='localhost', port=5000, ssl_context=context, debug=True)  # Запуск приложения с SSL и в режиме отладки
