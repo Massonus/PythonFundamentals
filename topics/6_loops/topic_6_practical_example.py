@@ -142,7 +142,7 @@
 # b = a.copy()
 # print(a, id(a))
 # print(b, id(b))
-# # # #####################
+# #####################
 # b[3][0] = 228
 # print(a, id(a[3]))
 # print(b, id(b[3]))
@@ -168,7 +168,7 @@
 # ###################
 
 # value = (7, 8, 3, 5)
-# ("bat", "led") + value
+# print(("bat", "led") + value)
 # print(value)
 
 # ###################
@@ -195,8 +195,8 @@
 # #####################
 
 # dict_number = {"key1": 1, "key2": 2}
-# dict_number["ball"]  # KeyError
-
+# # dict_number["ball"]  # KeyError
+#
 # print(dict_number.get("ball"))  # None
 
 # #####################
@@ -207,7 +207,7 @@
 # print(dict_number)
 
 # # ########################3
-
+#
 # dict_number.update({"key3": 333})
 # print(dict_number)
 
@@ -237,12 +237,12 @@
 # #Set
 # #####################
 
-# set_number = {1, 5, 8, 8, 8}
+set_number = {1, 5, 8, 8, 8}
 # print(set_number)
 
 # ####
 #
-# {1,1.2,2,2,2,2,7,9,4}
+# print({1, 1.2, 2, 2, 2, 2, 7, 9, 4})
 #
 # #######
 #
@@ -254,53 +254,54 @@
 # # не факт, що 4 потрапить в кінець множини
 # #
 # #перетин множин
-# set_number&{3,4,5}
+# print(set_number & {3, 4, 5})
 # print(set_number)
 #
 # ################
 # #об'єднання множин
 #
-# set_number | {3,4,5}
+# print(set_number | {3, 4, 5})
 #
 # ####################3
-# myset-{4,3,2}
+# print(set_number - {4, 3, 2})
+# print({4, 3, 2} - set_number)
 #
 # ##########
 # #Slices
 # ##########
 #
-# data=(1,2,34,6,7)
+# data = (1, 2, 34, 6, 7)
 # for x in data[::-1]:
 #     print(x)
 #
-# l=[6,8,9,44]
-# k=l
-# print(k,id(k))
-# print(l,id(l))
-# z=l[0:4]
-# print(z,id(z))
+# l = [6, 8, 9, 44]
+# k = l
+# print(k, id(k))
+# print(l, id(l))
+# z = l[0:4]
+# print(z, id(z))
 # l.append(55)
-# print(l,k,z)
+# print(l, k, z)
 #
 #
-# l1=[56,3,2,90]
-# l2=[9,3,5,7]
+# l1 = [56, 3, 2, 90]
+# l2 = [9, 3, 5, 7]
 # print("before sort", l1)
 # p = l1.sort()
 # print("p", p)
-# print("after sort",l1)
+# print("after sort", l1)
 # print("before sorted", l2)
 # t = sorted(l2)
 # print("after sorted", l2)
 # print("t", t)
 #
-# my_list=["red", "black", "white"]
-# u = enumerate(my_list,45)
+# my_list = ["red", "black", "white"]
+# u = enumerate(my_list, 45)
 # print(u)
-# for value in u:
-#     print(value)
+# for index, value in u:
+#     print(index, value)
 #
-# r = (67,5,34)
+# r = (67, 5, 34)
 # w = list(r)
 # print(w, id(w))
 # print(r, id(r))

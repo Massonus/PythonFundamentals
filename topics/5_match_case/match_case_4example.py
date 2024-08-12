@@ -18,7 +18,7 @@ item_2 = {"time": 'day', "action": "go a walk"}
 item_3 = {"time": 'morning', "move": "other", "action": "go to work"}
 item_4 = {}
 
-match item_4:
+match item_1:
     case {"time": 'evening', "action": action}:
         print(f"You almost finished the day! Now you must {action}!")
     case {"time": time, "action": action}:

@@ -1,16 +1,16 @@
 # total = 0
 #
-# def my_sum(arg1, arg2):
 #
+# def my_sum(arg1, arg2):
 #     global total
 #     total = arg1 + arg2
 #     print("Inside the function total : ", total)
 #     return total
 #
+#
 # print("before", total)
 # my_sum(56, 30)
 # print("Outside the function total : ", total)
-
 
 # def print_info(name, age=18):
 #     print("Name: ", name)
@@ -67,7 +67,7 @@
 #
 #
 # # # # ##
-# # print(add.__doc__)
+# print(add.__doc__)
 #
 # print(add(1, 10))
 #
@@ -80,15 +80,16 @@
 #     def myfunc(x):
 #         return x + n
 #     return myfunc
-####################################
-# new = newfunc(100)
+# ###################################
+# new = newfunc(200)
 # print(new(200))
+# print(new(500))
 # # ###
 
 #########################################
 # def func():
 #     pass
-
+#
 # ########################################## # # # #
 # print(func())
 #################################
@@ -203,12 +204,13 @@
 # # #Default argument аргументи задані по замовчуванню
 ########################################################
 
-# # def space(planet_name, center="Star"):
-# #     print(planet_name, "is orbiting a", center)
-# # #
-# # space("Mars")
-# # #
-# # space("Mars", "Black Hole")
+# def space(planet_name, center="Star"):
+#     print(planet_name, "is orbiting a", center)
+#
+#
+# space("Mars")
+#
+# space("Mars", "Black Hole")
 
 # # #########################################################
 # # # Variable-length arguments аргумент довільної довжини
@@ -216,13 +218,14 @@
 
 # def unknown(name, *args):
 #     print("name", name)
-#     print(type(args),args)
+#     print(type(args), args)
 #     for argument in args:
 #         print(argument)
-
-# # # # # # # # # #  ################
-# unknown("hello","world")
-# unknown(1, 2, 3, 4, 5) 
+#
+#
+# ################
+# unknown("hello", "world")
+# unknown(1, 2, 3, 4, 5)
 # unknown()
 
 ###############################
@@ -248,16 +251,18 @@
 # def func(**kwargs):
 #     print(type(kwargs), kwargs)
 #     return kwargs
+#
+#
 # # # # # # # # # # # ###
-# w = func(a = 1, b = 2, c = 3)
+# w = func(a=1, b=2, c=3)
 # print(w)
 # # # # # # # ###
-# t=func()
+# t = func()
 # print(t)
 # ##
-# w=func(a='python')
+# w = func(a='python')
 # print(w)
-# # # ###
+# # ###
 
 
 #######################################
@@ -266,19 +271,20 @@
 
 
 # def f(x):
-#     return x**2
-
+#     return x ** 2
+#
+#
 # # # # # # # # # # # # # ####
 # print(f(4))
 # # # # # # # ####
-
-# print((lambda x: x**2)(3))
+#
+# print((lambda x: x ** 2)(3))
 
 # g = lambda x: x**2
-
-
-# print(g) 
-# g(5) 
+#
+#
+# print(g)
+# g(5)
 # # # # # # # # # # # # #
 # print(g(3))
 # # # # # #
@@ -311,20 +317,24 @@
 
 # # #######Глобальна змінна
 
-# # # глобальна змінна age
-# # age = 44
+# глобальна змінна age
+# age = 44
+#
+#
+# def info():
+#     print(age)  # Друкуєм глобальну змінну age
 
-# # def info():
-# #     print(age) # Друкуєм глобальну змінну age
-# #  # створюєм локальну змінну age 
-# # def local_info():
-# #     age = 22  
-# #     print(age)
 
-# # info() 
-# # # print("###########")
-# # local_info() 
-# # # ######################
+# створюєм локальну змінну age
+# def local_info():
+#     age = 22
+#     print(age)
+#
+#
+# info()
+# print("###########")
+# local_info()
+# ######################
 
 # # x = 50
 # # def func(x):
@@ -352,6 +362,7 @@
 # # #####
 # # # оператор nonlocal
 # # #############################
+# num = 5
 # def counter():
 #     num = 0
 #     def incrementer():
